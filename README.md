@@ -468,4 +468,3 @@ npm run test:cart
 ```
 
 Verifies all 14 test cases including authentication, quantity updates, stock enforcement, item deletions, and duplicate handling.
-
