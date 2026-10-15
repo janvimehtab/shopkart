@@ -41,9 +41,19 @@ app.use("/products", productRoutes);
 app.use("/wishlist", wishlistRoutes);
 app.use("/cart", cartRoutes);
 app.use("/orders", orderRoutes);
+import path from 'path';
+
+// 1. Serve static frontend assets compiled by Vite
+app.use(express.static(path.join(process.cwd(), 'dist')));
+
+// 2. React Router SPA fallback (handles pages like /products, /cart, /checkout)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+});
 
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/shopkart";
+
 
 mongoose
   .connect(MONGO_URI)
